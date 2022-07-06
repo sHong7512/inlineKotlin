@@ -49,4 +49,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exText2" />
 
+    <TextView
+        android:id="@+id/exText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="exText4 go Click!"
+        android:textColor="@color/black"
+        android:background="#eeeeee"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exText3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         val exText1 = findViewById<TextView>(R.id.exText1)
         val exText2 = findViewById<TextView>(R.id.exText2)
         val exText3 = findViewById<TextView>(R.id.exText3)
+        val exText4 = findViewById<TextView>(R.id.exText4)
 
         exText1.countClickListener_1({ 0 }) { cnt, str ->
             exText1.text = "<<$str>>\nCount : $cnt"
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         }
         exText3.countClickListener_3({ 0 }) {tv, cnt ->
             tv.text = "<<example 3 reified Extension>>\nCount : $cnt"
+        }
+        exText4.countClickListener_4(null) {tv, cnt ->
+            tv.text = "<<example 4 noinline, invoke Extension>>\nCount : $cnt"
         }
     }
 
@@ -42,6 +46,14 @@ class MainActivity : AppCompatActivity() {
 
     private inline fun <reified T: View> T.countClickListener_3(initialCount: () -> Int, crossinline clickOperator: (T, Int) -> Unit){
         var cnt = initialCount()
+        setOnClickListener { view ->
+            cnt++
+            clickOperator(view as T, cnt)
+        }
+    }
+
+    private inline fun <reified T: View> T.countClickListener_4(noinline initialCount: (() -> Int)?, crossinline clickOperator: (T, Int) -> Unit){
+        var cnt = initialCount?.invoke() ?: 100
         setOnClickListener { view ->
             cnt++
             clickOperator(view as T, cnt)
